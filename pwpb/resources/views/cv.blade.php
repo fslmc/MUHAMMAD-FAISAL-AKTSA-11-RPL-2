@@ -69,6 +69,7 @@
                 <div class="box">
                     <div class="box-item">
                         <span>Gapernah kerja</span>
+                        <span>2000-2000</span>
                     </div>
                 </div>
             </div>
