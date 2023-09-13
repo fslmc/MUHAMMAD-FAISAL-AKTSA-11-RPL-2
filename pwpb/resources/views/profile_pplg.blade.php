@@ -14,7 +14,7 @@
     <div class="background">
         
         <!-- Navbar -->
-        <nav class="navbar navbar-expand-sm navbar-light sticky-top navig text-uppercase fw-bolder rounded">
+        <nav class="navbar navbar-expand-sm navbar-dark sticky-top navig text-uppercase fw-bolder rounded">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#"><img src="{{asset('assets/logo.png')}}" class="rounded-circle nav-img" width="80" height="70"></a>
                 
@@ -42,7 +42,7 @@
         </nav>
         
         <!-- Header/Banner -->
-        <header class="container-xxl border text-center mt-4 bg-light-subtle amogus">
+        <header class="container-liquid border text-center mt-4 bg-light-subtle amogus">
 
             <h1>PENGEMBANGAN PERANGKAT LUNAK & GIM</h1>
             <!-- Add any banner content here -->
