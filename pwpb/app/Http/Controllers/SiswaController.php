@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Siswa;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 
 class SiswaController extends Controller
@@ -17,6 +19,7 @@ class SiswaController extends Controller
 
     public function create(Request $request)
     {
+        Alert::success('BERHAIDHASI', 'DATA BERHASIL DIBUAT');
         // Validasi data yang dikirim dari formulir
         $validatedData = $request->validate([
             'nis' => 'required|unique:siswa', 
@@ -29,23 +32,23 @@ class SiswaController extends Controller
         ]);
 
 
-        // Tambahan validasi untuk memeriksa apakah setidaknya satu input telah diisi
-    if (empty(array_filter($validatedData))) {
-        return redirect()->route('siswa.create')->with('error', 'Harap isi setidaknya satu input.');
-    }
+        // // Tambahan validasi untuk memeriksa apakah setidaknya satu input telah diisi
+        // if (empty(array_filter($validatedData))) {
+        //     return redirect()->route('siswa.create')->with('error', 'Harap isi setidaknya satu input.');
+        // }
 
-    // Cek apakah NIS sudah ada dalam database
-    $existingSiswa = Siswa::where('nis', $request->nis)->first();
+        // // Cek apakah NIS sudah ada dalam database
+        // $existingSiswa = Siswa::where('nis', $request->nis)->first();
 
-    if ($existingSiswa) {
-        return redirect()->route('siswa.create')->with('error', 'NIS sudah ada dalam database.');
-    }
+        // if ($existingSiswa) {
+        //     return redirect()->route('siswa.create')->with('error', 'NIS sudah ada dalam database.');
+        // }
 
-    // Jika NIS belum ada, simpan data siswa ke dalam database
-    Siswa::create($validatedData);
+        // Jika NIS belum ada, simpan data siswa ke dalam database
+        Siswa::create($validatedData);
 
-    // Redirect kembali ke halaman input dengan pesan sukses
-    return redirect()->route('siswa.index')->with('success', 'Data siswa berhasil disimpan');
+        // Redirect kembali ke halaman input dengan pesan sukses
+        return redirect()->route('siswa.index')->with('success', 'Data siswa berhasil disimpan');
     }
 
     public function edit($id)
@@ -63,6 +66,7 @@ class SiswaController extends Controller
 
     public function update(Request $request, $id)
     {
+        Alert::success('BERHASIL', 'DATA BERHASIL DIEDIT');
         // Validasi data yang dikirim dari formulir
         $this->validate($request, [
             'nis' => 'required',
@@ -98,6 +102,8 @@ class SiswaController extends Controller
 
     public function destroy($id)
     {
+        Alert::success('BERHAIDHASI', 'DATA BERHASIL DAIHPUS');
+
         // Cari data siswa berdasarkan ID
         $siswa = Siswa::find($id);
 

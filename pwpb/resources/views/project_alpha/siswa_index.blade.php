@@ -3,12 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @vite('resources/css/app.css')
     <title>Document</title>
 </head>
 <body>
-    <h1>Daftar Siswa</h1>
-    <a href="{{route ('siswa.create')}}"><button>Create</button></a>
-    <table border="1">
+    <h1 class="text-center font-bold text-xl">Daftar Siswa</h1>
+    <a href="{{route ('siswa.create')}}"><button class="btn btn-primary">Create</button></a>
+    @include('sweetalert::alert')
+    <div class="block w-full overflow-x-auto">
+      <table class="items-center bg-transparent w-full border-collapse ">        
         <thead>
             <tr>
                 <th>NIS</th>
