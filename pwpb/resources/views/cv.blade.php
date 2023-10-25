@@ -6,38 +6,41 @@
     <link rel="stylesheet" rype="text/css" href="{{url('/css/cv.css')}}">
     <title>CV saya</title>
 </head>
+
 <body>
     <div class="container">
 
         <div class="side">
 
             <div class="image">
-                <img src="{{url('/assets/akukesoku.png')}}" alt="">
+                <img src="#" alt="">
             </div>
+            @foreach ($siswa as $hasil)
             <div class="identity">
                 <div class="identity-item">
                     <label for="">Nama</label>
-                    <span>Muhammad Faisal Aktsa</span>
+                    <span>{{ $hasil->nama }}</span>
                 </div>
 
                 <div class="identity-item">
                     <label for="">Tanggal Lahir</label>
-                    <span>17 Maret 2007</span>
+                    <span>{{ $hasil->tanggal }}</span>
                 </div>
 
                 <div class="identity-item">
                     <label for="">Alamat</label>
-                    <span>Kp. Mande, Rt/Rw. 2/2, Kec. Cimenyan, Desa. Cikadut, Kab. Bandung </span>
+                    <span>{{ $hasil->alamat }}</span>
                 </div>
 
                 <div class="identity-item">
                     <label for="">Kontak</label>
-                    <Span>No. Telp : 08696969</Span>
-                    <span>Email : fslf@gmail.com</span>
-                    <span>Insstagram : fo.safjifd</span>
+                    <Span>No. Telp : {{ $hasil->no_telp }}</Span>
+                    <span>Email : fslfsisal17@gmail.com</span>
+                    <span>Insstagram : f.</span>
                     <span>Facebook : M Faisal Aktsa</span>
                 </div>
             </div>
+            @endforeach
             
         </div>
 
@@ -57,7 +60,7 @@
                             <span>MTS MIMHA</span>
                         </div>
                         <div class="box-item">
-                            <span>Esemka</span>
+                            <span>SMK</span>
                             <span>2022-</span>
                             <span>SMKN 2 BANDUNG</span>
                         </div>
