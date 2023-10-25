@@ -28,11 +28,24 @@ class SiswaController extends Controller
             'alamat' => 'required',
         ]);
 
-        // Simpan data siswa ke dalam database
-        Siswa::create($validatedData);
 
-        // Redirect kembali ke halaman input dengan pesan sukses
-        return redirect()->route('siswa.index')->with('success', 'Data siswa berhasil disimpan');
+        // Tambahan validasi untuk memeriksa apakah setidaknya satu input telah diisi
+    if (empty(array_filter($validatedData))) {
+        return redirect()->route('siswa.create')->with('error', 'Harap isi setidaknya satu input.');
+    }
+
+    // Cek apakah NIS sudah ada dalam database
+    $existingSiswa = Siswa::where('nis', $request->nis)->first();
+
+    if ($existingSiswa) {
+        return redirect()->route('siswa.create')->with('error', 'NIS sudah ada dalam database.');
+    }
+
+    // Jika NIS belum ada, simpan data siswa ke dalam database
+    Siswa::create($validatedData);
+
+    // Redirect kembali ke halaman input dengan pesan sukses
+    return redirect()->route('siswa.index')->with('success', 'Data siswa berhasil disimpan');
     }
 
     public function edit($id)

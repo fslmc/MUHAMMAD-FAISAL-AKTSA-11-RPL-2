@@ -7,19 +7,29 @@
 </head>
 <body>
     <h1>INPURT DATA SISWA</h1>
-
+    <a href="{{ route('siswa.index') }}"><button>Kembali</button></a>
     <form method="POST" action="{{ route('siswa.create') }}">
     @csrf
         Nis : <input type="text" name="nis" id="nis">
+        @error('nis')
+        <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+
         Nama : <input type="text" name="nama" id="nama">
+
         <select name="jenis_kelamin" id="jenis_kelamin" id="jenis_kelamin">
             <option value="Laki-laki">Laki-laki</option>
             <option value="Perempuan">Perempuan</option>
         </select>
+
         Tempat lahir : <input type="text" name="tempat_lahir" id="tempat_lahir" jenis="tempat_lahir">
+
         tanggal lahir : <input name="tanggal_lahir" name="tanggal_lahir" id="tanggal_lahir" type="date">
+
         no_telp : <input name="no_telp" id="no_telp" type="number"><br>
-        Alamat : <textarea name="alamat" id="alamat" cols="10" rows="20"></textarea><br>    
+
+        Alamat : <textarea name="alamat" id="alamat" cols="10" rows="20"></textarea><br>   
+         
         <button type="input">kirim</button>
 
     </form>

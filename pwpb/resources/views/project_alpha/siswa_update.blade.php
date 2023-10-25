@@ -7,6 +7,7 @@
 </head>
 <body>
     <h1>EDIT DATA SISWA</h1>
+    <a href="{{ route('siswa.index') }}"><button>Kembali</button></a>
     <form method="POST" action="{{ route('siswa.update', ['id' => $siswa->id]) }}">
         @csrf
         @method('PUT') <!-- Method override untuk mengubah data -->
