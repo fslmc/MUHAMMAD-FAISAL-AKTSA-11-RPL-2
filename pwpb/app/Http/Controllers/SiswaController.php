@@ -18,37 +18,31 @@ class SiswaController extends Controller
     }
 
     public function create(Request $request)
-    {
-        Alert::success('BERHAIDHASI', 'DATA BERHASIL DIBUAT');
-        // Validasi data yang dikirim dari formulir
-        $validatedData = $request->validate([
-            'nis' => 'required|unique:siswa', 
+    {        
+        // Validasi input form
+        $request->validate([
+            'nis' => 'required',
             'nama' => 'required',
             'jenis_kelamin' => 'required',
-            'tempat_lahir' => 'required',
-            'tanggal_lahir' => 'required|date',
             'no_telp' => 'required',
+            'tempat_lahir' => 'required',
+            'tanggal_lahir' => 'required',
             'alamat' => 'required',
         ]);
 
+        // Simpan data ke database
+        $siswa = new Siswa();
+        $siswa->nis = $request->nis;
+        $siswa->nama = $request->nama;
+        $siswa->jenis_kelamin = $request->jenis_kelamin;
+        $siswa->no_telp = $request->no_telp;
+        $siswa->tempat_lahir = $request->tempat_lahir;
+        $siswa->tanggal_lahir = $request->tanggal_lahir;
+        $siswa->alamat = $request->alamat;
+        $siswa->save();
 
-        // // Tambahan validasi untuk memeriksa apakah setidaknya satu input telah diisi
-        // if (empty(array_filter($validatedData))) {
-        //     return redirect()->route('siswa.create')->with('error', 'Harap isi setidaknya satu input.');
-        // }
-
-        // // Cek apakah NIS sudah ada dalam database
-        // $existingSiswa = Siswa::where('nis', $request->nis)->first();
-
-        // if ($existingSiswa) {
-        //     return redirect()->route('siswa.create')->with('error', 'NIS sudah ada dalam database.');
-        // }
-
-        // Jika NIS belum ada, simpan data siswa ke dalam database
-        Siswa::create($validatedData);
-
-        // Redirect kembali ke halaman input dengan pesan sukses
-        return redirect()->route('siswa.index')->with('success', 'Data siswa berhasil disimpan');
+        // Redirect ke halaman lain atau tampilkan pesan sukses
+        return redirect()->route('siswa.index'); 
     }
 
     public function edit($id)
@@ -66,7 +60,6 @@ class SiswaController extends Controller
 
     public function update(Request $request, $id)
     {
-        Alert::success('BERHASIL', 'DATA BERHASIL DIEDIT');
         // Validasi data yang dikirim dari formulir
         $this->validate($request, [
             'nis' => 'required',
@@ -77,14 +70,32 @@ class SiswaController extends Controller
             'no_telp' => 'required',
             'alamat' => 'required',
         ]);
-
+    
         // Ambil data siswa berdasarkan ID
         $siswa = Siswa::find($id);
-
+    
         if (!$siswa) {
             return abort(404); // Tampilkan halaman 404 jika data siswa tidak ditemukan
         }
-
+    
+        // Cek apakah data yang diinputkan sama dengan data yang ada di database
+        if ($request->nis === $siswa->nis &&
+            $request->nama === $siswa->nama &&
+            $request->jenis_kelamin === $siswa->jenis_kelamin &&
+            $request->tempat_lahir === $siswa->tempat_lahir &&
+            $request->tanggal_lahir === $siswa->tanggal_lahir &&
+            $request->no_telp === $siswa->no_telp &&
+            $request->alamat === $siswa->alamat) {
+            return redirect()->route('siswa.edit', ['id' => $request->id])->with('info', 'Tidak ada perubahan data.');
+        }
+    
+        // Cek apakah NIS yang diubah sama dengan NIS yang sudah ada dalam database selain data dengan ID yang sedang diedit
+        $existingSiswa = Siswa::where('nis', $request->nis)->where('id', '<>', $id)->first();
+    
+        if ($existingSiswa) {
+            return back()->with('error', 'NIS sudah ada dalam database. Data tidak diperbarui.');
+        }
+    
         // Simpan perubahan data siswa
         $siswa->nis = $request->nis;
         $siswa->nama = $request->nama;
@@ -93,16 +104,16 @@ class SiswaController extends Controller
         $siswa->tanggal_lahir = $request->tanggal_lahir;
         $siswa->no_telp = $request->no_telp;
         $siswa->alamat = $request->alamat;
-
+    
         $siswa->save();
-
-    return redirect()->route('siswa.index')->with('success', 'Data siswa berhasil diperbarui.');
+    
+        return redirect()->route('siswa.index')->with('success', 'Data siswa berhasil diperbarui.');
     }
 
 
     public function destroy($id)
     {
-        Alert::success('BERHAIDHASI', 'DATA BERHASIL DAIHPUS');
+        
 
         // Cari data siswa berdasarkan ID
         $siswa = Siswa::find($id);
@@ -113,7 +124,7 @@ class SiswaController extends Controller
 
         // Hapus data siswa
         $siswa->delete();
-
+        Alert::success('BERHAIDHASI', 'DATA BERHASIL DAIHPUS');
         return redirect()->route('siswa.index')->with('success', 'Data siswa berhasil dihapus.');
     }
 

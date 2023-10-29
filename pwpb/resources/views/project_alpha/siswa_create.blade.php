@@ -29,7 +29,7 @@
             </div>
             <div>
                 <label class="text-white dark:text-gray-200" for="passwordConfirmation">Jenis Kelamin</label>
-                <select name="jenis_kelamin" id="jenis_kelamin" id="jenis_kelamin" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
+                <select name="jenis_kelamin" id="jenis_kelamin" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
                   <option value="Laki-laki">Laki-laki</option>
                   <option value="Perempuan">Perempuan</option>
                 </select>
@@ -46,8 +46,8 @@
             </div>
 
             <div>
-                <label class="text-white dark:text-gray-200" for="passwordConfirmation">Tanggal Lahir</label>
-                <input id="date" type="date" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
+                <label class="text-white dark:text-gray-200">Tanggal Lahir</label>
+                <input name="tanggal_lahir" id="tanggal_lahir" type="date" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
             </div>
             <div>
                 <label class="text-white dark:text-gray-200" for="passwordConfirmation">Alamat</label>

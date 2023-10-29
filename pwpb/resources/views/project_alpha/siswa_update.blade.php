@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +8,16 @@
     <title>EDIT DATA</title>
 </head>
 <body>
+@if(session('sweet_error'))
+    <script>
+        Swal.fire({
+            title: 'Error',
+            text: '{{ session('sweet_error') }}',
+            icon: 'error',
+        });
+    </script>
+@endif
+
     <h1>INPURT DATA SISWA</h1>
     <a href="{{ route('siswa.index') }}"><button>Kembali</button></a>
 
@@ -18,6 +29,10 @@
             <label class="text-white dark:text-gray-200" for="password">NIS</label>
             <input type="text" name="nis" id="nis" value="{{ $siswa->nis }}" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
         </div>
+
+        @error('nis')
+        <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
 
         <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
             <div>
@@ -48,8 +63,7 @@
             </div>
             <div>
                 <label class="text-white dark:text-gray-200" for="alamat">Alamat</label>
-                <textarea name="alamat" id="alamat" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
-                  {{ $siswa->alamat }}
+                <textarea name="alamat" id="alamat" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">{{ $siswa->alamat }}
                 </textarea>
             </div>
         </div>
